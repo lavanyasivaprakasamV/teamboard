@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+
+  /* brand (deep teal) */
+  --color-blue-600: #0e7c86;
+  --color-blue-700: #0a6670;
+
+  /* page, columns, text greys (cool blue-grey) */
+  --color-gray-100: #eef2f6;
+  --color-gray-200: #e1e8ef;
+  --color-gray-400: #94a3b8;
+  --color-gray-500: #64748b;
+  --color-gray-600: #526173;
+  --color-gray-800: #1b2a3b;
+
+  /* join / success */
+  --color-green-600: #2f7d57;
+  --color-green-700: #276649;
+
+  /* errors + delete */
+  --color-red-100: #fde8e6;
+  --color-red-600: #c8372d;
+  --color-red-700: #a82b23;
+
+  /* medium priority badge */
+  --color-yellow-100: #fdf1cf;
+  --color-yellow-800: #7a5a0a;
+
+  --radius-lg: 0.625rem;
+  --radius-xl: 1rem;
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200);
+  }
+
+  body {
+    background-color: var(--color-gray-100);
+    color: var(--color-gray-800);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    letter-spacing: -0.01em;
+  }
+
+  button {
+    cursor: pointer;
+    transition:
+      background-color 0.15s,
+      color 0.15s,
+      opacity 0.15s;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  input,
+  select {
+    background-color: #fff;
+    transition:
+      border-color 0.15s,
+      box-shadow 0.15s;
+  }
+  input::placeholder {
+    color: var(--color-gray-400);
+  }
+  input:focus,
+  select:focus {
+    outline: none;
+    border-color: var(--color-blue-600);
+    box-shadow: 0 0 0 3px rgb(14 124 134 / 0.18);
+  }
+  input[type="checkbox"] {
+    accent-color: var(--color-blue-600);
+  }
+}
+
+.shadow {
+  box-shadow:
+    0 1px 2px rgb(16 42 67 / 0.05),
+    0 4px 14px rgb(16 42 67 / 0.06);
+  border: 1px solid var(--color-gray-200);
+}
+.rounded {
+  border-radius: 0.5rem;
+}
+
+/* clickable cards (workspace list) hover effect */
+a.shadow {
+  transition:
+    box-shadow 0.15s,
+    transform 0.15s,
+    border-color 0.15s;
+}
+a.shadow:hover {
+  box-shadow: 0 8px 24px rgb(16 42 67 / 0.1);
+  border-color: var(--color-blue-600);
+  transform: translateY(-2px);
+}
