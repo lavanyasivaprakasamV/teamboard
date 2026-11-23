@@ -127,7 +127,7 @@ All routes except register and login need `Authorization: Bearer <token>`.
 Requirements: Node.js 20+ and a MongoDB connection string (a free Atlas cluster works).
 
 ```bash
-git clone https://github.com/lavanyasivaprakasamV/teamboard.git
+git clone https://github.com/<username>/teamboard.git
 cd teamboard
 ```
 
