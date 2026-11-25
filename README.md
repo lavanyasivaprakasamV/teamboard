@@ -44,32 +44,29 @@ A multi-tenant task management app (think a small Trello/Jira). Teams get their 
 
 ## Architecture
 
-```mermaid
-flowchart LR
-  Browser["React app (Vercel)"] -- "HTTPS + JWT" --> API["Express API (Render)"]
-  API --> DB[("MongoDB Atlas")]
+```
+React app (Vercel)  --- HTTPS + JWT --->  Express API (Render)  --->  MongoDB Atlas
 ```
 
 Every workspace-scoped request passes through a chain of middleware, so a handler only runs once the caller is authenticated, is a member of the workspace, and has the right role.
 
-```mermaid
-flowchart LR
-  R[Request] --> A["auth: verify JWT"]
-  A --> W["workspaceAccess: is the user a member?"]
-  W --> P["projectAccess: does the project belong to this workspace?"]
-  P --> Q["requireRole: admin only?"]
-  Q --> H[Route handler]
+```
+Request
+  -> auth             verify the JWT
+  -> workspaceAccess  is the user a member of this workspace?
+  -> projectAccess    does the project belong to this workspace?
+  -> requireRole      is this action admin only?
+  -> Route handler
 ```
 
 ### Data model
 
-```mermaid
-erDiagram
-  USER ||--o{ WORKSPACE : owns
-  WORKSPACE }o--o{ USER : "members (admin or member)"
-  WORKSPACE ||--o{ PROJECT : has
-  PROJECT ||--o{ TASK : has
-  USER ||--o{ TASK : "assigned to"
+```
+USER      1---*  WORKSPACE   a user owns many workspaces
+WORKSPACE *---*  USER        members, each with a role (admin or member)
+WORKSPACE 1---*  PROJECT
+PROJECT   1---*  TASK
+USER      1---*  TASK        a task can be assigned to a member
 ```
 
 ### How tenant isolation works
